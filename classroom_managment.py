@@ -93,4 +93,4 @@ def get_professions(name):
                 subjects.append(subject)
             unique_subjects = set(subjects)
 
-   print(unique_subjects)
+   return unique_subjects
