@@ -85,12 +85,12 @@ def avg_grade(name, profession):
     return None
 
 def get_professions(name):
-   grades_list = []
+   unique_subjects = set()
    subjects = []
    for student in classroom:
         if student['name'] == name:
             for subject, _ in student['grades']:
-                 if subject not in subjects:
-                     subjects.append(subject)
+                subjects.append(subject)
+            unique_subjects = set(subjects)
 
-   print(subjects)
+   print(unique_subjects)
