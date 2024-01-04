@@ -34,39 +34,63 @@ classroom = [
 ]
 
 
+def index(name):
+    for i,student in enumerate(classroom) :
+        if name==student['name']:
+            return i
+    return -1
 def add_student(name, email=None):
-    """Add a new student to the classroom
-    with the following keys:
-    'name': the given name
-    'email': if email is given use it otherwise use <name>@example.com
-             in lowercase, you can use the `s.lower()` method
-    'grade': initialize with empty list
-    """
-    pass
-
-
+    if index(name)==-1:
+        if email==None:
+          
+            email=name.lower()+'@example.com'
+        classroom.append({'name':name,'email':email,'grades':[],});
+    else:
+        print("the student is exist!");
 def delete_student(name):
-    """Delete a student from the classroom"""
-    pass
-
-
-def set_email(name, email):
-    """Sets the email of the student"""
-    pass
-
-
+    i=index(name)
+    if i==-1:
+        print("the student is not exist!")
+    else:
+        del classroom[i]
+def set_email(name, new_email):
+    i=index(name)
+    if i==-1:
+        print("the student is not exist!")
+    else:
+        
+        for student in classroom:
+            if student['name'] == name:
+                 student['email'] = new_email
+                 break
 def add_grade(name, profession, grade):
-    """Adds a new grade to the student grades"""
-    pass
-
+    i=index(name)
+    if i==-1:
+        print("the student is not exist!")
+    else:
+        for student in classroom:
+            if student['name'] == name:
+                  student['grades'].append((profession, grade))
+                  break
 
 def avg_grade(name, profession):
-    """Returns the average of grades of the student
-    in the specified profession
-    """
-    pass
-
+    for student in classroom:
+        if student['name'] == name:
+            grades = [grade for subj, grade in student['grades'] if subj == profession]
+            if len(grades) > 0:
+                gpa = sum(grades) / len(grades)
+                return gpa
+            else:
+                return None
+    return None
 
 def get_professions(name):
-    """Returns a list of unique professions that student has grades in"""
-    pass
+   grades_list = []
+   subjects = []
+   for student in classroom:
+        if student['name'] == name:
+            for subject, _ in student['grades']:
+                 if subject not in subjects:
+                     subjects.append(subject)
+
+   print(subjects)
